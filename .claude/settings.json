@@ -1,0 +1,30 @@
+{
+    "permissions": {
+      "allow": [
+        "Bash(claude mcp get:*)",
+        "Bash(claude mcp list)",
+        "Bash(gh pr checks:*)",
+        "Bash(gh pr list:*)",
+        "Bash(gh pr view:*)",
+        "Bash(gh run list:*)",
+        "Bash(gh run view:*)",
+        "Bash(git config:*)",
+        "Bash(git diff:*)",
+        "Bash(git log:*)",
+        "Bash(ls:*)",
+        "Bash(lsof:*)",
+        "Bash(test:*)",
+        "Bash(tree:*)",
+        "Bash(uv:*)",
+        "Bash(wc:*)",
+        "Bash(xargs:*)",
+
+        "mcp__ide__getDiagnostics"
+      ],
+      "deny": [
+        "Read(**/.env)",
+        "Read(**/.envrc)"
+      ]
+    }
+  }
+  
