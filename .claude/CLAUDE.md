@@ -6,7 +6,9 @@ Use British spelling throughout.
 
 ## Project Purpose
 
-A uv-based Python 3.14+ project template configured for test-driven development and code quality checks. Provides a ready-to-use structure for packages (`src/`), standalone scripts (`scripts/`), and Jupyter notebooks (`notebooks/`), with pre-commit hooks running Ruff, Pyright, and pytest on every commit.
+A CLI tool that wraps the [cat-facts API](https://github.com/alexwohlbruck/cat-facts/), designed to be invoked by Claude Code as a shell command. Built as a learning project to explore creating CLI tools that AI coding assistants can use — a lightweight alternative to building an MCP server.
+
+Features and subcommands will be determined iteratively as the project develops.
 
 ## Tech Stack
 
@@ -15,8 +17,6 @@ A uv-based Python 3.14+ project template configured for test-driven development 
 - **Pyright** — type checking
 - **pytest** — testing
 - **pre-commit** — automated quality checks
-- **ipykernel** / **nbdime** — Jupyter notebook support
-- **pandas** / **plotly** — included as example data dependencies
 
 ## Project Structure
 
@@ -24,7 +24,6 @@ UV-based Python 3.14+ template with TDD workflow:
 
 - `src/` — distributable packages
 - `scripts/` — standalone utilities
-- `notebooks/` — Jupyter notebooks
 - `tests/` — mirrors `src/` structure
 
 ## UV Workflow (Strict)

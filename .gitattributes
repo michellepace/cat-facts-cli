@@ -25,7 +25,3 @@
 *.webp binary
 *.xlsx binary
 *.zip binary
-
-# Jupyter notebooks - strip outputs via nbstripout git filter
-# Requires global setup: uv tool install nbstripout && nbstripout --install --global
-*.ipynb filter=nbstripout

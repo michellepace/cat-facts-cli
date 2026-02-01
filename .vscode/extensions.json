@@ -7,10 +7,6 @@
         "charliermarsh.ruff",         // Python linter & formatter (Astral ecosystem like UV)
         "anysphere.cursorpyright",    // Python language server (autocomplete, hover info, etc.)
 
-        // Jupyter notebooks (this project uses notebooks/)
-        "ms-toolsai.jupyter",           // Core Jupyter notebook support
-        "ms-toolsai.jupyter-renderers", // Renderers for Plotly, Vega, and other rich outputs
-
         // Convenient Formatting and Linting
         "tamasfe.even-better-toml",   // TOML language support (syntax highlighting, validation)
         "davidanson.vscode-markdownlint",  // Markdown linter (same tool CodeRabbit uses)

@@ -1,102 +1,40 @@
-# Python Project Template
+# Cat Facts CLI
 
-![Banner showing uv package manager logo plus Python logo equals "Python ready to go"](x_docs/images/readme-banner.jpg)
+![Banner showing a cat terminal icon with the text "CLI for Claude Code on the Cat Facts API — A learning project"](x_docs/images/readme-banner.jpg)
 
-A [uv](https://docs.astral.sh/uv/)-based Python 3.14+ project template configured for test-driven development (pytest) and code quality checks (Ruff, Pyright). These run automatically every time you commit.
+A CLI tool that wraps the [Cat Facts API](https://github.com/alexwohlbruck/cat-facts/), designed to be invoked by [Claude Code](https://claude.ai/code) as a shell command. Built as a learning project to explore creating CLI tools that Claude Code can use — a lightweight alternative to building an MCP server. Perhaps more effective - we'll see.
 
-Supports development in [`src/`](src/) packages, standalone [`scripts/`](scripts/), and Jupyter [`notebooks/`](notebooks/). Complete IDE setup included for VSCode/Cursor ([extensions](.vscode/extensions.json), [settings](.vscode/settings.json)).
+## Why?
 
-## 📁 Project Structure
+Many apps have APIs — Gmail ([REST API](https://developers.google.com/gmail/api)), Microsoft Outlook ([Microsoft Graph](https://learn.microsoft.com/en-us/graph/overview)), [Gamma](https://developers.gamma.app/docs/getting-started), etc. Some have official MCPs, some don't. Either way, writing a small CLI to wrap the API directly may be simpler and more effective.
 
-Key project directories and files:
+Why not create an MCP instead of a CLI?
 
-| | Name | Description |
-|:-:|------|-------------|
-| 📂 | [.claude/](.claude/) | Claude Code configuration and project instructions |
-| 📂 | .venv/ | Virtual environment created by `uv sync` (gitignored) |
-| 📂 | [.vscode/](.vscode/) | [extensions](.vscode/extensions.json) for VSCode/Cursor and IDE [settings](.vscode/settings.json) |
-| 📂 | [notebooks/](notebooks/) | Jupyter notebooks |
-| 📂 | [scripts/](scripts/) | Standalone utility scripts |
-| 📂 | [src/uv_python_template/](src/uv_python_template/) | Package source code |
-| 📂 | [tests/](tests/) | Test files mirroring src/ structure |
-| 📄 | [.gitattributes](.gitattributes) | Git line-ending, diff, and notebook filter settings |
-| 📄 | [.gitignore](.gitignore) | Files excluded from version control |
-| 📄 | [.markdownlint.yaml](.markdownlint.yaml) | Markdown linting configuration |
-| 📄 | [.pre-commit-config.yaml](.pre-commit-config.yaml) | Automated quality checks before each commit |
-| 📄 | [.python-version](.python-version) | Python version specification for uv |
-| 📄 | [pyproject.toml](pyproject.toml) | Project dependencies and tool configuration |
-| 📄 | [README.md](README.md) | This file |
-| 📄 | [uv.lock](uv.lock) | Dependency versions (do not edit manually) |
+An MCP is itself a wrapper on an API — an extra layer of indirection. Tool definitions and intermediate results flow through the context window, flooding it if you have not used a subagent.
 
-## 📦 Installation
+A CLI skips all of that. Claude Code just runs a command and reads stdout — no protocol layer, no tool schemas, no discovery handshake. And Claude Code is already very good with CLIs and Bash.
 
-1. Prerequisite: install the uv Python package manager [from here](https://docs.astral.sh/uv/getting-started/installation/)
+**Hypothesis:** I think Claude Code will be more effective with a CLI for the tools I want to use.
 
-2. Clone the repository to "my-project-name"
+## Setup
 
-   ```bash
-    git clone https://github.com/michellepace/uv-python-template.git my-project-name
-   ```
-
-3. Run these terminal commands for first-time setup:
-
-    ```bash
-    # Change directory into new project
-    cd my-project-name
-
-    # Install project dependencies (creates .venv/ directory)
-    uv sync
-
-    # Install pre-commit hooks (runs quality checks before each commit)
-    uv run pre-commit install
-    ```
-
-4. Open "my-project-name" in your IDE and open a new terminal (so it picks up the virtual environment):
-   - Run `which python` → should show a path ending in `.venv/bin/python`
-   - Run `uv run pre-commit run --all-files` → linting, type checking, and tests should pass
-
-5. Install the recommended extensions from [.vscode/extensions.json](.vscode/extensions.json). These are already configured in [.vscode/settings.json](.vscode/settings.json).
-
-6. Open [`notebooks/example.ipynb`](notebooks/example.ipynb), select the `.venv` Python interpreter, and run it.
-
-   <div align="center">
-     <a href="notebook_pic.jpg">
-       <img src="notebook_pic.jpg" alt="VS Code screenshot showing example.ipynb notebook with project code integration. The notebook demonstrates importing from uv_python_template.play and testing the add() function with successful output. Pink arrows point to the kernel selector in the top right, with 'select' annotation indicating where to choose the Python 3.14 (.venv) environment." width="600">
-     </a>
-     <p><em>Project Structure (left) with Jupyter Notebook (right)</em></p>
-   </div>
-
-7. [Set up Jupyter Git integration (Recommended)](#-jupyter-notebook-git-integration-recommended) — keeps notebook outputs out of version control while preserving them locally.
-
-## 📓 Jupyter Notebook Git Integration (Recommended)
-
-This project uses [nbstripout](https://github.com/kynan/nbstripout) to keep notebooks clean in Git. It automatically strips cell outputs and metadata when committing, so you get:
-
-- **Cleaner diffs** — only code changes, not output noise
-- **Smaller repos** — no large binary outputs bloating history
-- **Fewer merge conflicts** — outputs don't clash between branches
-- **No re-running after commits** — your local notebook keeps its outputs; only the version sent to Git is stripped
-
-**One-time global setup** (works for all your current and future repos with notebooks):
+Requires [uv](https://docs.astral.sh/uv/getting-started/installation/) and Python 3.14+.
 
 ```bash
-# Install nbstripout as a global uv tool
-uv tool install nbstripout
-
-# Configure Git to use it globally
-nbstripout --install --global
-
-# To remove later: nbstripout --uninstall --global && uv tool uninstall nbstripout
+git clone https://github.com/michellepace/cat-facts-cli.git
+cd cat-facts-cli
+uv sync
+uv run pre-commit install
 ```
 
-Any repo with `*.ipynb filter=nbstripout` in `.gitattributes` (like this one) will now automatically strip outputs on commit.
+## References
 
-## ✨ Make It Yours
+[Code execution with MCP: Building more efficient agents | Anthropic](https://www.anthropic.com/engineering/code-execution-with-mcp)
 
-Use AI prompts to quickly adapt this template to your project:
+Other CLI ideas from [Free APIs](https://free-apis.github.io/):
 
-1. Instruct AI (renaming): *Refactor this project to consistently rename it from "uv-python-template" to "my-project-name" throughout. Use `git mv` for renaming!*
-
-2. Instruct AI (changes): *I will not be using Jupyter notebooks in this project. Remove all notebook-related files, references, and dependencies throughout.*
-
-3. Manually refine [.claude/CLAUDE.md](.claude/CLAUDE.md) to suit your preferences and project.
+- Documents & Productivity: I love PDF
+- Business: Logo dev
+- Universities
+- Transportation: (looking for flights)
+- Food & Drink: Whiskey Hunter
