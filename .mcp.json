@@ -1,0 +1,23 @@
+{
+    "mcpServers": {
+      "exa": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "exa-mcp-server"],
+        "env": {
+          "EXA_API_KEY": "${API_KEY_MCP_EXA}"
+        }
+      },
+      "firecrawl": {
+        "type": "stdio",
+        "command": "npx",
+        "args": [
+          "-y",
+          "firecrawl-mcp"
+        ],
+        "env": {
+          "FIRECRAWL_API_KEY": "${API_KEY_MCP_FIRECRAWL}"
+        }
+      }
+    }
+  }

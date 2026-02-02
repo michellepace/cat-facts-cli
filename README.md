@@ -31,10 +31,50 @@ uv run pre-commit install
 
 [Code execution with MCP: Building more efficient agents | Anthropic](https://www.anthropic.com/engineering/code-execution-with-mcp)
 
-Other CLI ideas from [Free APIs](https://free-apis.github.io/):
+## Personal Notes
+
+<personal_notes>
+
+**The CLI-for-Claude-Code Concept**
+
+Claude Code runs your CLI as a shell command and reads stdout. The flow is: user asks Claude a question → Claude decides it needs data → runs `cat-facts random --type cat` → reads the JSON output → uses it to answer. Your CLI is a translator between Claude Code and the API.
+
+**It's NOT a 1:1 Mapping — You're Right**
+
+A good CLI wrapper exposes use cases, not endpoints. Key principles:
+
+1. Use cases, not routes — `cat-facts random` not `cat-facts get-random-fact`. Hide the API structure.
+2. JSON output by default — Claude Code parses JSON far better than prose. Add a `--human` flag for people.
+3. Combine API calls — One CLI command can make multiple API calls, merge results, add computed fields.
+4. Good `--help` text — Claude Code reads `--help` to discover what your CLI can do. Write it for a developer audience.
+5. Errors on stderr, data on stdout — So Claude can distinguish success from failure.
+
+**Why Cat Facts Is Limited**
+
+It's not just "fewer endpoints." Without auth, you can only read facts. You can't practise:
+
+- Write operations (`cat-facts submit "Dogs wag tails" --type dog`)
+- CRUD patterns (create/update/delete)
+- Confirmation prompts ("Delete this? [y/N]")
+- Multi-step workflows
+- Session management
+
+The Google OAuth flow could be implemented in the CLI (like `gh auth login` does), but that's a significant undertaking for a learning project.
+
+**Other CLI ideas**
+
+[Free APIs](https://free-apis.github.io/):
 
 - Documents & Productivity: I love PDF
 - Business: Logo dev
 - Universities
 - Transportation: (looking for flights)
 - Food & Drink: Whiskey Hunter
+
+**End Target:** Gamma, Outlook email traiage al la Claude Code
+
+</personal_notes>
+
+## Validation Principles
+
+See [Validation Principles](x_docs/validation.md) for the full testing and verification strategy.

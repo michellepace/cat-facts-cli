@@ -13,6 +13,7 @@ Features and subcommands will be determined iteratively as the project develops.
 ## Tech Stack
 
 - **Python 3.14+** with **uv** package manager
+- **Typer** — CLI framework (built on Click)
 - **Ruff** — linting (all rules enabled) and formatting
 - **Pyright** — type checking
 - **pytest** — testing

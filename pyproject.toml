@@ -16,7 +16,12 @@ description = "A learning project to wrap a simple API with a CLI so Claude Code
 readme = "README.md"
 authors = [{ name = "Michelle" }]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "typer>=0.21.1",
+]
+
+[project.scripts]
+cat-facts = "cat_facts_cli.cli:main"
 
 [dependency-groups]
 dev = [
